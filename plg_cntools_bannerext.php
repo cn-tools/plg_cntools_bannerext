@@ -31,9 +31,18 @@ class plgContentPlg_CNTools_BannerExt extends JPlugin
 
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{
-		$regex = '#{BannerExt}(\d+){/BannerExt}#is';
-		$this->_articleID = $article->id;
-		$article->text = preg_replace_callback($regex, array('plgContentPlg_CNTools_BannerExt', 'renderBannerExt'), $article->text, -1, $count );
+		if (property_exists($article, 'text'))
+		{
+			$regex = '#{BannerExt}(\d+){/BannerExt}#is';
+	
+			if (property_exists($article, 'id'))
+			{
+				$this->_articleID = $article->id;
+			} else {
+				$this->_articleID = '_noArticleIdSet';
+			}
+			$article->text = preg_replace_callback($regex, array('plgContentPlg_CNTools_BannerExt', 'renderBannerExt'), $article->text, -1, $count );
+		}
 	}
 
 	public function renderBannerExt(&$matches)
