@@ -21,7 +21,7 @@ class plgContentPlg_CNTools_BannerExt extends JPlugin
 	var $_Count;
 	var $_articleID;
 
-	public function plgContentPlg_CNTools_BannerExt( &$subject, $config )
+	public function __construct(&$subject, $config)
 	{
 		parent::__construct( $subject, $config );
 		
